@@ -15,5 +15,4 @@ const Layout = Page => {
         </div>
     );
 }
-
 export default Layout;
