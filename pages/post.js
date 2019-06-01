@@ -8,7 +8,7 @@ const PageContent = withRouter(props => (
     </div>
 ));
 
-const Page = props => (
+const Page = () => (
     <LayoutBlog>
         <PageContent />
     </LayoutBlog>
