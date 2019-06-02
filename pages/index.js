@@ -39,19 +39,57 @@
 import LayoutFetch from '../comps/LayoutFetch.js';
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
+import Markdown from 'react-markdown';
+
+const PostLink = ({show}) => (
+    <li key={show.id} id={show.id}>
+        <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
+            <a>{show.name}</a>
+        </Link>
+        <style jsx>{`
+            a { 
+                font-family: 'Arial'; 
+                text-decoration: none;
+                color: blue;
+            }
+            a:hover {
+                opacity: 0.6;
+            }
+        `}</style>
+    </li>
+);
 
 const Index = props => (
     <LayoutFetch>
         <h1>Fetch sample</h1>
+        <div className="markdown">
+            <Markdown source={`
+### react-markdown example
+
+This is some Markdown integrated with the help of the react-markdown module.
+[links](/) can be integrated easily as known from markdown syntax.
+
+---
+`} />
+        </div>
+        <style jsx global>{`
+            .markdown { font-family:'Arial'; }
+            .markdown a { text-decoration: none; color: blue; }
+            .markdown a:hover { opacity: .6; }
+            .markdown h3 { margin:0; padding:0; text-transform:uppercase; }
+        `}</style>
+
         <ul>
-            {props.shows.map( show => (
-                <li key={show.id}>
-                    <Link as={`/p/${show.id}`} href={`/post?id=${show.id}`}>
-                        <a>{show.name}</a>
-                    </Link>
-                </li>
-            ))}
+            {props.shows.map( show => <PostLink show={show}/>)}
         </ul>
+        <style jsx>{`
+            h1, a { font-family: 'Arial'; }
+            ul { padding: 0 }
+            li { 
+                list-style: none;
+                margin: 5px 0;
+            }
+        `}</style>
     </LayoutFetch>
 );
 
