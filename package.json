@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
+    "now-build": "next build",
     "dev": "next",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "devSRV": "nodemon server.js",
     "startSRV": "NODE_ENV=production node server.js"
   },
